@@ -28,6 +28,23 @@
     </div>
   </header>
 
+  <section id="weather-panel" class="weather-panel" aria-labelledby="weather-heading">
+    <div class="weather-panel-heading">
+      <div><span class="eyebrow">LOCAL WEATHER</span><h1 id="weather-heading">Weather</h1></div>
+      <span id="weather-status" role="status">天気データを取得中…</span>
+    </div>
+    <form id="weather-form" class="weather-form" autocomplete="off">
+      <label for="weather-city">地域</label>
+      <input id="weather-city" name="city" type="search" placeholder="市区町村名（例：静岡市）" aria-label="天気を表示する地域" maxlength="100" required>
+      <button id="weather-refresh" class="button button-primary" type="submit">天気を更新</button>
+    </form>
+    <div class="weather-current" aria-live="polite">
+      <div><p id="weather-place">静岡市</p><strong id="weather-temperature">--°</strong><p id="weather-description">天候を取得しています</p></div>
+      <div><p id="weather-high-low">最高 -- / 最低 --</p><p id="weather-details">体感 -- · 湿度 -- · 風 -- · 降水確率 --</p><small id="weather-updated"></small></div>
+    </div>
+    <p class="weather-attribution">天気データ：<a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a></p>
+  </section>
+
   <main class="workspace">
     <section class="editor-panel" aria-label="Code editor">
       <div class="panel-heading">
