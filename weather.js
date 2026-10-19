@@ -40,18 +40,12 @@
 
   function currentHourIndex(times) {
     if (!Array.isArray(times) || times.length === 0) return 0;
-    const now = new Date();
-    const localKey = [
-      now.getFullYear(),
-      String(now.getMonth() + 1).padStart(2, "0"),
-      String(now.getDate()).padStart(2, "0"),
-      "T",
-      String(now.getHours()).padStart(2, "0")
-    ].join("");
+    const now = Date.now();
     let best = 0;
     for (let i = 0; i < times.length; i++) {
-      if (times[i] <= localKey) best = i;
-      else break;
+      const timestamp = new Date(times[i]).getTime();
+      if (Number.isFinite(timestamp) && timestamp <= now) best = i;
+      else if (Number.isFinite(timestamp)) break;
     }
     return best;
   }
