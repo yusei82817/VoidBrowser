@@ -38,8 +38,10 @@
     return Number.isFinite(value) ? Math.round(value) : null;
   }
 
-  function currentHourIndex(times) {
+  function currentHourIndex(times, currentTime) {
     if (!Array.isArray(times) || times.length === 0) return 0;
+    const exactIndex = times.indexOf(currentTime);
+    if (exactIndex >= 0) return exactIndex;
     const now = Date.now();
     let best = 0;
     for (let i = 0; i < times.length; i++) {
@@ -94,7 +96,7 @@
       const current = data.current;
       const daily = data.daily || {};
       const hourly = data.hourly || {};
-      const index = currentHourIndex(hourly.time);
+      const index = currentHourIndex(hourly.time, current.time);
       const temp = number(current.temperature_2m);
       const feels = number(current.apparent_temperature);
       const humidity = number(current.relative_humidity_2m);
