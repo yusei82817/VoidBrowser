@@ -8,7 +8,8 @@ VoidBrowser is an experimental browser-engine project being built in small, brow
 - Experimental markup diagnostics; native browser DOM/layout/rendering still renders the preview
 - Search subsystem that resolves address-bar text into either an HTTP(S) URL or a search-provider URL
 - Search provider adapters for Google, DuckDuckGo, Bing, Brave Search, and Startpage
-- Browser-based tests for search input classification and URL generation
+- Browser-based regression tests for search input classification and URL generation
+- Address/search form connected to the resolver, with provider selection and new-tab opening
 - PWA manifest and offline app-shell cache
 
 ## Search subsystem
@@ -20,11 +21,11 @@ VoidBrowser is an experimental browser-engine project being built in small, brow
 - `providers()` lists supported providers.
 - `getDefaultProvider()` and `setDefaultProvider(id)` read or save the preferred provider in local storage.
 
-The default provider is Google. URL inputs are restricted to HTTP and HTTPS; unsupported schemes such as `javascript:` are rejected rather than executed. Bare domains and local addresses such as `localhost:8000` are normalized to HTTPS. This module delegates search to existing providers; it is not a crawler, search index, or independent web search engine. Search UI and full page navigation have not been implemented yet.
+The default provider is Google. URL inputs are restricted to HTTP and HTTPS; unsupported schemes such as `javascript:` are rejected rather than executed. Bare domains and local addresses such as `localhost:8000` are normalized to HTTPS. This module delegates search to existing providers; it is not a crawler, search index, or independent web search engine. The app now has an address/search form. Submitting a URL or query requests opening the target in a new tab; the PWA does not embed arbitrary sites in its own preview because many sites block iframe embedding. This is a search-provider adapter, not a crawler or independent search index.
 
 ## Test the search subsystem
 
-Serve the repository over HTTP(S), then open `tests/search-tests.html`. The tests do not send queries to search providers.
+Serve the repository over HTTP(S), then open `tests/search-tests.html`. The 17 tests do not send queries to search providers. They are written for the browser and still need to be run in the Codespaces browser to confirm the complete page-level result.
 
 ## Run in GitHub Codespaces
 
@@ -48,7 +49,7 @@ This is not currently a full standalone browser and does not implement complete 
 - `style.css` — current UI styles
 - `search.js` — address input classification and search provider adapters
 - `engine.js` — hybrid preview compilation and basic markup diagnostics
-- `app.js` — controls, preview execution, and PWA registration
+- `app.js` — address/search controls, preview execution, and PWA registration
 - `tests/search-tests.html` and `tests/search-tests.js` — browser-run tests
 - `manifest.json` — PWA metadata
 - `sw.js` — offline app-shell caching
