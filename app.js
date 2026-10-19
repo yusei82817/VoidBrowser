@@ -116,5 +116,12 @@ document.querySelector("#counter")?.addEventListener("click", (event) => {
     });
   }
 
+  if (window.VoidSearch) {
+    const providerNames = window.VoidSearch.providers().map((provider) => provider.name).join(", ");
+    writeLog("Search subsystem ready. Providers: " + providerNames + ".");
+  } else {
+    writeLog("Search subsystem failed to load.", true);
+  }
+
   run();
 })();
