@@ -105,6 +105,29 @@
     equal(search.resolveInput("anything", { provider: "not-a-provider" }).code, "unknown-provider");
   });
 
+  test("leading and trailing spaces are trimmed", () => {
+    const result = search.resolveInput("  example.com/path  ");
+    equal(result.url, "https://example.com/path");
+  });
+
+  test("unsupported FTP URL scheme is rejected", () => {
+    const result = search.resolveInput("ftp://example.com/file");
+    equal(result.kind, "error");
+    equal(result.code, "unsupported-scheme");
+  });
+
+  test("out-of-range port is rejected", () => {
+    const result = search.resolveInput("localhost:99999");
+    equal(result.kind, "error");
+    equal(result.code, "invalid-url");
+  });
+
+  test("every provider builds an HTTPS URL", () => {
+    search.providers().forEach((provider) => {
+      truthy(search.buildSearchUrl("test", provider.id).startsWith("https://"));
+    });
+  });
+
   summary.textContent = passed + " passed, " + failed + " failed.";
   summary.style.fontWeight = "bold";
   summary.style.color = failed ? "crimson" : "green";
