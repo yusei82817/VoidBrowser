@@ -7,6 +7,8 @@ VoidBrowser is an experimental browser-engine project being built in small, brow
 - HTML, CSS, and JavaScript playground with a sandboxed preview
 - Experimental markup diagnostics; native browser DOM/layout/rendering still renders the preview
 - Search subsystem that resolves address-bar text into either an HTTP(S) URL or a search-provider URL
+- Home-screen weather widget with editable city search, current conditions, feels-like temperature, humidity, wind, precipitation probability, and daily high/low
+- Weather data from Open-Meteo with graceful error messages; city preference is saved locally when storage is available
 - Search provider adapters for Google, DuckDuckGo, Bing, Brave Search, and Startpage
 - Browser-based regression tests for search input classification and URL generation
 - Address/search form connected to the resolver, with provider selection and new-tab opening
@@ -21,7 +23,7 @@ VoidBrowser is an experimental browser-engine project being built in small, brow
 - `providers()` lists supported providers.
 - `getDefaultProvider()` and `setDefaultProvider(id)` read or save the preferred provider in local storage.
 
-The default provider is Google. URL inputs are restricted to HTTP and HTTPS; unsupported schemes such as `javascript:` are rejected rather than executed. Bare domains and local addresses such as `localhost:8000` are normalized to HTTPS. This module delegates search to existing providers; it is not a crawler, search index, or independent web search engine. The app now has an address/search form. Submitting a URL or query requests opening the target in a new tab; the PWA does not embed arbitrary sites in its own preview because many sites block iframe embedding. This is a search-provider adapter, not a crawler or independent search index.
+The weather widget starts with Shizuoka City as a changeable example location; enter any supported city name to change it. It uses the Open-Meteo geocoding and forecast APIs and does not request device location. Weather data is provided as-is; the widget shows retrieval errors instead of inventing values. The default search provider is Google. URL inputs are restricted to HTTP and HTTPS; unsupported schemes such as `javascript:` are rejected rather than executed. Bare domains and local addresses such as `localhost:8000` are normalized to HTTPS. This module delegates search to existing providers; it is not a crawler, search index, or independent web search engine. The app now has an address/search form. Submitting a URL or query requests opening the target in a new tab; the PWA does not embed arbitrary sites in its own preview because many sites block iframe embedding. This is a search-provider adapter, not a crawler or independent search index.
 
 ## Test the search subsystem
 
@@ -48,6 +50,7 @@ This is not currently a full standalone browser and does not implement complete 
 - `index.html` — current app shell and playground UI
 - `style.css` — current UI styles
 - `search.js` — address input classification and search provider adapters
+- `weather.js` — city geocoding and live weather widget using Open-Meteo
 - `engine.js` — hybrid preview compilation and basic markup diagnostics
 - `app.js` — address/search controls, preview execution, and PWA registration
 - `tests/search-tests.html` and `tests/search-tests.js` — browser-run tests
