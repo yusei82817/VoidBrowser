@@ -123,5 +123,53 @@ document.querySelector("#counter")?.addEventListener("click", (event) => {
     writeLog("Search subsystem failed to load.", true);
   }
 
+  const addressForm = $("#address-form");
+  const addressInput = $("#address-input");
+  const providerSelect = $("#search-provider");
+
+  function initializeSearchUI() {
+    if (!window.VoidSearch || !addressForm || !addressInput || !providerSelect) return;
+
+    window.VoidSearch.providers().forEach((provider) => {
+      const option = document.createElement("option");
+      option.value = provider.id;
+      option.textContent = provider.name;
+      providerSelect.appendChild(option);
+    });
+    providerSelect.value = window.VoidSearch.getDefaultProvider();
+
+    providerSelect.addEventListener("change", () => {
+      try {
+        const result = window.VoidSearch.setDefaultProvider(providerSelect.value);
+        writeLog("Default search provider set to " + result.provider + (result.saved ? "." : " for this session only; storage is unavailable."));
+      } catch (error) {
+        writeLog(error instanceof Error ? error.message : String(error), true);
+      }
+    });
+
+    addressForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const result = window.VoidSearch.resolveInput(addressInput.value, { provider: providerSelect.value });
+      if (result.action === "none") {
+        addressInput.focus();
+        return;
+      }
+      if (result.action === "error") {
+        const detail = result.code === "unsupported-scheme"
+          ? "Only HTTP(S) URLs and search queries are supported. Scheme rejected: " + (result.scheme || "unknown")
+          : "Input could not be resolved (" + result.code + ").";
+        writeLog(detail, true);
+        addressInput.setAttribute("aria-invalid", "true");
+        return;
+      }
+
+      addressInput.removeAttribute("aria-invalid");
+      const targetType = result.action === "search" ? "Search: " + result.query : "Navigate: " + result.url;
+      window.open(result.url, "_blank", "noopener,noreferrer");
+      writeLog(targetType + " — requested in a new tab.");
+    });
+  }
+
+  initializeSearchUI();
   run();
 })();
