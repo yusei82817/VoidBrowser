@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090d16">
+  <meta name="description" content="VoidBrowser: a lightweight hybrid browser-engine playground.">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <title>VoidBrowser</title>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="VoidBrowser home">
+      <span class="brand-mark">V</span>
+      <span><strong>VoidBrowser</strong><small>HYBRID ENGINE LAB</small></span>
+    </a>
+    <div class="top-actions">
+      <span id="engine-status" class="status"><i></i> Engine ready</span>
+      <button id="install-button" class="button button-quiet" hidden>Install app</button>
+      <button id="run-button" class="button button-primary" title="Ctrl+Enter">▶ Run</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="editor-panel" aria-label="Code editor">
+      <div class="panel-heading">
+        <div><span class="eyebrow">PLAYGROUND</span><h1>Engine workspace</h1></div>
+        <div class="editor-actions">
+          <button id="sample-button" class="button button-quiet">Load sample</button>
+          <button id="clear-button" class="button button-quiet">Clear</button>
+        </div>
+      </div>
+      <div class="editors">
+        <section class="editor-card">
+          <div class="editor-title"><span class="file-dot html-dot"></span>HTML <span class="file-ext">index.html</span></div>
+          <textarea id="html-input" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="HTML source"><main class="demo">
+  <p class="tag">VOID / 001</p>
+  <h1>Hello, <span>world.</span></h1>
+  <p>This page is rendered inside an isolated preview.</p>
+  <button id="demo-button">Test JavaScript</button>
+  <p id="message" aria-live="polite">Engine standing by.</p>
+</main></textarea>
+        </section>
+        <section class="editor-card">
+          <div class="editor-title"><span class="file-dot css-dot"></span>CSS <span class="file-ext">style.css</span></div>
+          <textarea id="css-input" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="CSS source">body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #101827;
+  color: #e8efff;
+  font: 16px system-ui, sans-serif;
+}
+.demo { max-width: 34rem; padding: 2rem; }
+.tag { color: #76a9ff; letter-spacing: .2em; font-size: .75rem; }
+h1 { font-size: clamp(2.5rem, 8vw, 5rem); margin: .2em 0; }
+h1 span { color: #79aaff; }
+button {
+  border: 1px solid #547bbd;
+  border-radius: 10px;
+  padding: .75rem 1rem;
+  background: #1c3153;
+  color: white;
+  cursor: pointer;
+}
+button:hover { background: #294674; }</textarea>
+        </section>
+        <section class="editor-card editor-card-js">
+          <div class="editor-title"><span class="file-dot js-dot"></span>JavaScript <span class="file-ext">script.js</span></div>
+          <textarea id="js-input" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="JavaScript source">document.querySelector("#demo-button")?.addEventListener("click", () => {
+  document.querySelector("#message").textContent =
+    "JavaScript executed in the preview sandbox.";
+});</textarea>
+        </section>
+      </div>
+      <footer class="editor-footer"><span id="source-stats">HTML · CSS · JS</span><span>Ctrl / ⌘ + Enter to run</span></footer>
+    </section>
+
+    <section class="preview-panel" aria-label="Preview">
+      <div class="preview-heading">
+        <div><span class="eyebrow">LIVE OUTPUT</span><h2>Preview</h2></div>
+        <span class="preview-lock">▣ Sandboxed</span>
+      </div>
+      <div class="preview-frame-wrap">
+        <div class="browser-chrome">
+          <div class="window-dots"><i></i><i></i><i></i></div>
+          <div class="address-bar"><span>◇</span> void://preview</div>
+          <button id="refresh-button" class="refresh-button" aria-label="Refresh preview" title="Refresh preview">↻</button>
+        </div>
+        <iframe id="preview" title="VoidBrowser page preview" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe>
+      </div>
+      <div class="console-panel">
+        <div class="console-heading"><span>ENGINE LOG</span><button id="clear-log-button" class="text-button">Clear log</button></div>
+        <div id="engine-log" class="console-output" role="log" aria-live="polite"><p><span class="log-mark">›</span> VoidBrowser initialized.</p><p><span class="log-mark">›</span> Preview scripts run in a sandbox.</p></div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><span>VoidBrowser · Experimental hybrid engine</span><span>Not a replacement for Chromium or WebKit</span></footer>
+  <script src="./engine.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
