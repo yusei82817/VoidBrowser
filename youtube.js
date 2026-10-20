@@ -68,10 +68,8 @@
       return;
     }
     const target = "https://www.youtube.com/results?search_query=" + encodeURIComponent(query);
-    const opened = window.open(target, "_blank", "noopener,noreferrer");
-    setStatus(opened === null
-      ? "検索タブがブロックされた可能性があります。ポップアップを許可するか、検索ボタンをもう一度押してください。"
-      : "YouTubeの検索結果を新しいタブで開きました。動画URLを下の欄に貼り付けると、このパネルで再生できます。");
+    window.open(target, "_blank", "noopener,noreferrer");
+    setStatus("YouTubeの検索結果を新しいタブで開くよう要求しました。動画URLを下の欄に貼り付けると、このパネルで再生できます。");
   });
 
   playerForm.addEventListener("submit", (event) => {
