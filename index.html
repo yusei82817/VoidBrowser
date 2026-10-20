@@ -45,7 +45,28 @@
     <p class="weather-attribution">天気データ：<a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a></p>
   </section>
 
-  <main class="workspace">
+
+  <section id="youtube-panel" class="youtube-panel" aria-labelledby="youtube-heading">
+    <div class="youtube-heading">
+      <div><span class="eyebrow">VIDEO PLAYER</span><h2 id="youtube-heading">YouTube</h2></div>
+      <span id="youtube-status" role="status">検索して動画URLを貼り付けてください。</span>
+    </div>
+    <form id="youtube-search-form" class="youtube-controls" autocomplete="off">
+      <label for="youtube-query">動画を検索</label>
+      <input id="youtube-query" type="search" maxlength="200" placeholder="YouTubeで動画を検索…" required>
+      <button class="button button-primary" type="submit">YouTube検索</button>
+    </form>
+    <form id="youtube-player-form" class="youtube-controls youtube-player-controls" autocomplete="off">
+      <label for="youtube-url">動画URL / ID</label>
+      <input id="youtube-url" type="text" inputmode="url" placeholder="https://www.youtube.com/watch?v=…" required>
+      <button class="button button-primary" type="submit">この画面で再生</button>
+      <button id="youtube-clear" class="button button-quiet" type="button">クリア</button>
+    </form>
+    <div id="youtube-player" class="youtube-player" aria-label="YouTube動画プレーヤー"></div>
+    <div id="youtube-empty" class="youtube-empty">検索結果から動画を選び、そのURLを上の「動画URL / ID」欄に貼り付けてください。</div>
+    <p class="youtube-note">検索結果はYouTubeのタブで開きます。動画の埋め込みが禁止されている場合やログインが必要な場合、この画面では再生できないことがあります。</p>
+  </section>
+\n  <main class="workspace">
     <section class="editor-panel" aria-label="Code editor">
       <div class="panel-heading">
         <div><span class="eyebrow">PLAYGROUND</span><h1>Engine workspace</h1></div>
@@ -122,7 +143,7 @@ button:hover { background: #294674; }</textarea>
   </main>
   <footer class="site-footer"><span>VoidBrowser · Experimental hybrid engine</span><span>Not a replacement for Chromium or WebKit</span></footer>
   <script src="./search.js"></script>
-  <script src="./weather.js"></script>
+  <script src="./weather.js"></script>\n  <script src="./youtube.js"></script>
   <script src="./engine.js"></script>
   <script src="./app.js"></script>
 </body>
