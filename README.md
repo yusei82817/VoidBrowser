@@ -9,6 +9,7 @@ VoidBrowser is an experimental browser-engine project being built in small, brow
 - Search subsystem that resolves address-bar text into either an HTTP(S) URL or a search-provider URL
 - Home-screen weather widget with editable city search, current conditions, feels-like temperature, humidity, wind, precipitation probability, and daily high/low
 - YouTube search handoff to YouTube plus a dedicated embedded player for pasted video URLs or IDs (subject to YouTube embed restrictions)
+- Void Spatial Audio: capture a user-selected tab's shared audio and spatialize it with Web Audio API HRTF panning, adjustable azimuth/elevation/distance, and generated reverb
 - Weather data from Open-Meteo with graceful error messages; city preference is saved locally when storage is available
 - Search provider adapters for Google, DuckDuckGo, Bing, Brave Search, and Startpage
 - Browser-based regression tests for search input classification and URL generation
@@ -53,9 +54,15 @@ This is not currently a full standalone browser and does not implement complete 
 - `search.js` — address input classification and search provider adapters
 - `weather.js` — city geocoding and live weather widget using Open-Meteo
 - `youtube.js` — YouTube search handoff and embedded video player
+- `spatial-audio.js` — tab-audio capture and HRTF spatial audio processing
+- `spatial-audio.css` — spatial audio panel styles
 - `engine.js` — hybrid preview compilation and basic markup diagnostics
 - `app.js` — address/search controls, preview execution, and PWA registration
 - `tests/search-tests.html` and `tests/search-tests.js` — browser-run tests
 - `manifest.json` — PWA metadata
 - `sw.js` — offline app-shell caching
 - `icon.svg` — application icon\n\n## YouTube panel\n\nSearch opens YouTube results in a separate tab because a standalone PWA cannot reliably read YouTube search results without an API key or server-side integration. Paste the selected video's URL or 11-character ID into the player field to load it in the VoidBrowser panel. Some videos cannot be embedded or require sign-in, and those restrictions are controlled by YouTube/video owners.\n
+
+## Void Spatial Audio
+
+Use the Void Spatial Audio panel on the home screen and choose **Tab** in the browser's screen-sharing picker. Enable the option to share that tab's audio. The panel uses `getDisplayMedia()` and the Web Audio API `PannerNode` with HRTF positioning. Azimuth, elevation, distance, and generated convolution reverb can be adjusted while audio is playing. Stop sharing from the panel or the browser's sharing indicator. This requires a secure context (HTTPS or localhost), a browser that supports tab-audio capture, and an explicit user gesture/permission each time. The browser may not offer tab audio on every platform. The captured audio is treated as one source; it does not separate vocals or instruments into independent 3D objects.
