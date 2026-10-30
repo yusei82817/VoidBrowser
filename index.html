@@ -46,6 +46,24 @@
   </section>
 
 
+  <section id="spatial-audio-panel" class="spatial-panel" aria-labelledby="spatial-heading">
+    <div class="spatial-heading">
+      <div><span class="eyebrow">AUDIO LAB</span><h2 id="spatial-heading">Void Spatial Audio</h2></div>
+      <span id="spatial-status" role="status" aria-live="polite">共有タブの音声を待機中</span>
+    </div>
+    <p class="spatial-description">別タブを画面共有し、そのタブの音声をHRTF方式で3D空間に配置します。開始後の共有画面で「タブの音声を共有」を有効にしてください。</p>
+    <div class="spatial-actions">
+      <button id="spatial-start" class="button button-primary" type="button">タブ音声の共有を開始</button>
+      <button id="spatial-stop" class="button button-quiet" type="button" hidden>共有を停止</button>
+    </div>
+    <div class="spatial-controls">
+      <label class="spatial-control" for="spatial-azimuth"><span>左右・方位 <output id="spatial-azimuth-value">0°</output></span><input id="spatial-azimuth" type="range" min="-180" max="180" value="0"></label>
+      <label class="spatial-control" for="spatial-elevation"><span>上下・仰角 <output id="spatial-elevation-value">0°</output></span><input id="spatial-elevation" type="range" min="-60" max="90" value="0"></label>
+      <label class="spatial-control" for="spatial-distance"><span>距離 <output id="spatial-distance-value">1.0 m</output></span><input id="spatial-distance" type="range" min="1" max="20" step="0.5" value="1"></label>
+      <label class="spatial-control" for="spatial-reverb"><span>残響 <output id="spatial-reverb-value">12%</output></span><input id="spatial-reverb" type="range" min="0" max="100" value="12"></label>
+    </div>
+    <p class="spatial-note">HTTPSまたはlocalhostが必要です。画面共有の許可は毎回必要です。共有ダイアログでタブ音声を選択してください。</p>
+  </section>
   <section id="youtube-panel" class="youtube-panel" aria-labelledby="youtube-heading">
     <div class="youtube-heading">
       <div><span class="eyebrow">VIDEO PLAYER</span><h2 id="youtube-heading">YouTube</h2></div>
@@ -144,6 +162,7 @@ button:hover { background: #294674; }</textarea>
   <footer class="site-footer"><span>VoidBrowser · Experimental hybrid engine</span><span>Not a replacement for Chromium or WebKit</span></footer>
   <script src="./search.js"></script>
   <script src="./weather.js"></script>\n  <script src="./youtube.js"></script>
+  <script src="./spatial-audio.js"></script>
   <script src="./engine.js"></script>
   <script src="./app.js"></script>
 </body>
