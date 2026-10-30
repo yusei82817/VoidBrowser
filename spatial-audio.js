@@ -70,7 +70,6 @@
     const audioTracks = stream.getAudioTracks();
     if (!audioTracks.length) throw new Error("共有音声がありません。「タブの音声を共有」を有効にしてください。");
 
-    audioContext = new AudioContext();
     source = audioContext.createMediaStreamSource(new MediaStream(audioTracks));
     panner = audioContext.createPanner();
     panner.panningModel = "HRTF";
@@ -109,12 +108,14 @@
     startButton.disabled = true;
     setStatus("共有するタブを選択してください…");
     try {
+      audioContext = new AudioContext();
+      const resumeAudio = audioContext.resume();
       displayStream = await navigator.mediaDevices.getDisplayMedia({
         video: { displaySurface: "browser" },
         audio: true
       });
       buildAudioGraph(displayStream);
-      await audioContext.resume();
+      await resumeAudio;
       active = true;
       startButton.hidden = true;
       stopButton.hidden = false;
