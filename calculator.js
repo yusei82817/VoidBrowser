@@ -12,7 +12,7 @@
 
   function tokenize(source) {
     const tokens = [];
-    const re = /\\s*(?:(\\d+(?:\\.\\d*)?|\\.\\d+)(?:([eE][+-]?\\d+))?|([a-zA-Z]+)|(\\+|\\-|\\*|\\/|\\%|\\^|\\(|\\)))/gy;
+    const re = /\s*(?:(\d+(?:\.\d*)?|\.\d+)(?:([eE][+-]?\d+))?|([a-zA-Z]+)|(\+|\-|\*|\/|\%|\^|\(|\)))/gy;
     let pos = 0;
     while (pos < source.length) {
       re.lastIndex = pos;
@@ -121,8 +121,8 @@
   function clear() { input = ""; justEvaluated = false; render(); }
   function backspace() { input = input.slice(0,-1); justEvaluated = false; render(); }
   function sign() {
-    if (!input) { input = "-"; }
-    else if (/^-?\\d*\\.?\\d+$/.test(input)) input = String(-Number(input));
+    if (!input) input = "-";
+    else if (/^-?\d*\.?\d+$/.test(input)) input = String(-Number(input));
     else input = "-(" + input + ")";
     justEvaluated = false; render();
   }
@@ -140,7 +140,7 @@
   });
   document.addEventListener("keydown", event => {
     if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) return;
-    if (/^[0-9.+\\-*/%^()]$/.test(event.key)) { append(event.key); event.preventDefault(); }
+    if (/^[0-9.+*/%^()\-]$/.test(event.key)) { append(event.key); event.preventDefault(); }
     else if (event.key === "Enter" || event.key === "=") { equals(); event.preventDefault(); }
     else if (event.key === "Backspace") { backspace(); event.preventDefault(); }
     else if (event.key === "Escape") { clear(); }
