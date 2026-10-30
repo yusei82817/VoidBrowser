@@ -1,4 +1,4 @@
-const CACHE_NAME = "voidbrowser-shell-v6";
+const CACHE_NAME = "voidbrowser-shell-v7";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -9,6 +9,7 @@ const APP_SHELL = [
   "./weather.js",
   "./youtube.js",
   "./spatial-audio.js",
+  "./calculator.js",
   "./app.js",
   "./manifest.json",
   "./icon.svg"
