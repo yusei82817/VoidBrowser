@@ -86,6 +86,52 @@
     <p class="youtube-note">検索結果はYouTubeのタブで開きます。動画の埋め込みが禁止されている場合やログインが必要な場合、この画面では再生できないことがあります。</p>
   </section>
 
+
+  <section id="calculator-panel" class="calculator-panel" aria-labelledby="calculator-heading">
+    <div class="calculator-heading">
+      <div><span class="eyebrow">UTILITY</span><h2 id="calculator-heading">Void Calculator</h2></div>
+      <span id="calculator-mode" class="calculator-mode">DEG</span>
+    </div>
+    <div class="calculator" role="group" aria-label="計算機">
+      <div class="calculator-screen">
+        <div id="calculator-expression" class="calculator-expression" aria-live="polite"></div>
+        <output id="calculator-display" class="calculator-display" aria-live="polite" aria-label="計算結果">0</output>
+      </div>
+      <div class="calculator-keys">
+        <button type="button" data-action="clear" class="calc-function">AC</button>
+        <button type="button" data-action="backspace" class="calc-function">⌫</button>
+        <button type="button" data-value="(" class="calc-function">(</button>
+        <button type="button" data-value=")" class="calc-function">)</button>
+        <button type="button" data-value="%" class="calc-function">%</button>
+        <button type="button" data-value="7">7</button><button type="button" data-value="8">8</button><button type="button" data-value="9">9</button>
+        <button type="button" data-value="/" class="calc-operator">÷</button>
+        <button type="button" data-value="sqrt(" class="calc-function">√</button>
+        <button type="button" data-value="4">4</button><button type="button" data-value="5">5</button><button type="button" data-value="6">6</button>
+        <button type="button" data-value="*" class="calc-operator">×</button>
+        <button type="button" data-value="^" class="calc-operator">xʸ</button>
+        <button type="button" data-value="1">1</button><button type="button" data-value="2">2</button><button type="button" data-value="3">3</button>
+        <button type="button" data-value="-" class="calc-operator">−</button>
+        <button type="button" data-action="angle" class="calc-function">DEG</button>
+        <button type="button" data-value="0">0</button><button type="button" data-value=".">.</button>
+        <button type="button" data-action="sign" class="calc-function">±</button>
+        <button type="button" data-value="+" class="calc-operator">+</button>
+        <button type="button" data-value="pi" class="calc-function">π</button>
+        <button type="button" data-value="e" class="calc-function">e</button>
+        <button type="button" data-value="sin(" class="calc-function">sin</button>
+        <button type="button" data-value="cos(" class="calc-function">cos</button>
+        <button type="button" data-value="tan(" class="calc-function">tan</button>
+        <button type="button" data-value="asin(" class="calc-function">sin⁻¹</button>
+        <button type="button" data-value="acos(" class="calc-function">cos⁻¹</button>
+        <button type="button" data-value="atan(" class="calc-function">tan⁻¹</button>
+        <button type="button" data-value="log(" class="calc-function">log</button>
+        <button type="button" data-value="ln(" class="calc-function">ln</button>
+        <button type="button" data-value="abs(" class="calc-function">|x|</button>
+        <button type="button" data-action="equals" class="calc-equals">=</button>
+      </div>
+      <p class="calculator-hint">Enterで計算、Escでクリア。キーボード入力にも対応。</p>
+    </div>
+  </section>
+
   <main class="workspace">
     <section class="editor-panel" aria-label="Code editor">
       <div class="panel-heading">
@@ -166,6 +212,7 @@ button:hover { background: #294674; }</textarea>
   <script src="./weather.js"></script>
   <script src="./youtube.js"></script>
   <script src="./spatial-audio.js"></script>
+  <script src="./calculator.js"></script>
   <script src="./engine.js"></script>
   <script src="./app.js"></script>
 </body>
