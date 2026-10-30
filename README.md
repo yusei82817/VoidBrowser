@@ -61,7 +61,12 @@ This is not currently a full standalone browser and does not implement complete 
 - `tests/search-tests.html` and `tests/search-tests.js` — browser-run tests
 - `manifest.json` — PWA metadata
 - `sw.js` — offline app-shell caching
-- `icon.svg` — application icon\n\n## YouTube panel\n\nSearch opens YouTube results in a separate tab because a standalone PWA cannot reliably read YouTube search results without an API key or server-side integration. Paste the selected video's URL or 11-character ID into the player field to load it in the VoidBrowser panel. Some videos cannot be embedded or require sign-in, and those restrictions are controlled by YouTube/video owners.\n
+- `icon.svg` — application icon
+
+## YouTube panel
+
+Search opens YouTube results in a separate tab because a standalone PWA cannot reliably read YouTube search results without an API key or server-side integration. Paste the selected video's URL or 11-character ID into the player field to load it in the VoidBrowser panel. Some videos cannot be embedded or require sign-in, and those restrictions are controlled by YouTube/video owners.
+
 
 ## Void Spatial Audio
 
